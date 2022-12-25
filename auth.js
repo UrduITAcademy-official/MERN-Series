@@ -4,30 +4,30 @@ const router=express.Router();
 require('./conn')
 const User=require("./userSchema")
 
-router.post('/register',(req,res)=>{
+router.post('/register',async(req,res)=>{
     
-
 const{name,email,work,password,cpassword}=req.body;
 
 if(!name ||!email|| !work|| !password ||!cpassword){
     return res.json({error:"Please fill All"});
 } 
 
-User.findOne({email:email}).then((userExists)=>{
-    if(userExists){
-        return res.json({error:"Please user different email "})
-    }
-    const user=new User(req.body)
-    user.save().then(()=>{
-        res.json({message:"Data-Saved"})
-    }).catch((err)=>res.json({error:"Failed to register data"}))
-})
+try{
+     const userExists=await User.findOne({email:email})
+
+     if(userExists){
+         return res.json({error:"Please use diff email "})
+     }
+     const user =new User({name,email,work,password,cpassword});
+     await user.save();
+     res.json({message:"User Register "})
+
+}catch(err){
+    console.log(err)
+}
  
 //console.log(req.body)
  //res.json({message:req.body});
-
-
-
 
 });
 
