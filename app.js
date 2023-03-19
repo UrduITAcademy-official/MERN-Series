@@ -29,7 +29,9 @@ app.get('/about',(req,res)=>{
     res.send('Hello from about page')
 });
 app.get('/contactus',(req,res)=>{
+    res.cookie("test",'Abdullah')
     res.send('Hello from contact page')
+    
 });
 app.listen(PORT,()=>{
     console.log('Server is Running')
