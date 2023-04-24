@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import{useNavigate} from "react-router-dom"
+import{useNavigate} from 'react-router-dom'
 function Register() {
-    const history=useNavigate();
+  const history=useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [work, setWork] = useState('');
@@ -26,16 +26,16 @@ function Register() {
       body: JSON.stringify(formData)
     });
   
-    const data = await response.json();
-
+    const data=await response.json();
     if(data.error){
-        alert(data.error);
-        console.log(data.error);
+      alert(data.error);
     }
     if(data.message){
-        alert(data.message);
-        history('/login')
+
+      alert(data.message);
+      history('/login')
     }
+    
     
   };
   

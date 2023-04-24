@@ -1,6 +1,7 @@
 
 const express=require('express')
 const router=express.Router();
+const authenticate=require("./middleware/authenticate")
 const jwt=require('jsonwebtoken');
 require('./conn')
 const User=require("./userSchema")
@@ -55,10 +56,11 @@ else{
             //res.json({message:"Password is Matched"})
             const token = await userLogin.genrateAuthToken();
             console.log(token);
-           res.cookie("jwtauth",token,{
+           res.cookie('jwtauth',token,{
                expires:new Date(Date.now()+25892000000),
                httpOnly:true
-           });
+           }).send();
+       
         
 
         }
@@ -76,6 +78,11 @@ else{
 
 
 
+});
+
+router.get('/about',authenticate,(req,res)=>{
+   res.send(req.rootUser);
+   console.log('Hello from about page')
 });
 
  
