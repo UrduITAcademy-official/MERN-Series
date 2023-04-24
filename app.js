@@ -21,13 +21,11 @@ const checkURL=(req,res,next)=>
 }
 app.use(checkURL);
 
-app.get('/',(req,res)=>{
-    res.send('Hello from Main-page')
-});
+//app.get('/',(req,res)=>{
+  //  res.send('Hello from Main-page')
+//});
 
-app.get('/about',(req,res)=>{
-    res.send('Hello from about page')
-});
+
 app.get('/contactus',(req,res)=>{
     res.cookie("test",'Abdullah')
     res.send('Hello from contact page')
