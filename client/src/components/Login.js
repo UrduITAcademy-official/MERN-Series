@@ -26,15 +26,17 @@ function login() {
       body: JSON.stringify(formData)
     });
   
-    const data=await response.json();
-    console.log(data)
+   // const data=await response.json();
+    //console.log(data)
 
-    if(data.message){
-        alert(data.message)
+    if(response.status==400){
+        alert("Error")
     }
-    if(data.error){
-        alert(data.message)
+   else {
+        alert("Sucessfully login")
     }
+   
+
     
     
   };

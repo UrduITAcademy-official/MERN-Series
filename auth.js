@@ -41,12 +41,12 @@ router.post('/signin',async(req,res)=>{
 try{
 const {email,password}=req.body;
 if(!email||!password){
-    return res.json({error:"please fill the data"})
+    return res.status(400).json({error:"please fill the data"})
 }
 const userLogin=await User.findOne({email:email});
 //console.log(userLogin);
 if(!userLogin){
-    res.json({error:"user error"});
+    res.status(400).json({error:"user error"});
 }
 else{
     //res.json({message:"user Signin Successfully Comparing password"})
@@ -59,13 +59,14 @@ else{
            res.cookie('jwtauth',token,{
                expires:new Date(Date.now()+25892000000),
                httpOnly:true
-           }).send();
-       
+           }).setHeader('message', 'Cookie set successfully')
+           .sendStatus(200).send();
+        
         
 
         }
         else{
-            res.json({message:"Password is Not matched with hash"})
+            res.status(400).json({message:"Password is Not matched with hash"})
         }
 
 }}
