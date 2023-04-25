@@ -2,22 +2,14 @@ import React, { useState } from 'react'
 import{useNavigate} from 'react-router-dom'
 function login() {
   const history=useNavigate();
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [work, setWork] = useState('');
   const [password, setPassword] = useState('');
-  const [cpassword, setcpassword] = useState('');
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
-     
       email,
-     
       password
-     
     };
-  
     const response = await fetch('/signin', {
       method: 'POST',
       headers: {
@@ -25,15 +17,12 @@ function login() {
       },
       body: JSON.stringify(formData)
     });
-  
-   // const data=await response.json();
-    //console.log(data)
-
     if(response.status==400){
         alert("Error")
     }
    else {
         alert("Sucessfully login")
+        history('/About')
     }
    
 
