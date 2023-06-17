@@ -12,8 +12,6 @@ const app=express();
 
 app.use(express.json());
 app.use(require("./auth"));
-
-
 const checkURL=(req,res,next)=>
 {
   console.warn('current route ',req.originalUrl)

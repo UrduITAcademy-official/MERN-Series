@@ -1,15 +1,22 @@
 import React, { useState } from 'react'
 import{useNavigate} from 'react-router-dom'
-function login() {
+function Login() {
   const history=useNavigate();
+
   const [email, setEmail] = useState('');
+
   const [password, setPassword] = useState('');
+  const [cpassword, setcpassword] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
+ 
       email,
-      password
+      password,
+    
     };
+  
     const response = await fetch('/signin', {
       method: 'POST',
       headers: {
@@ -17,15 +24,15 @@ function login() {
       },
       body: JSON.stringify(formData)
     });
-    if(response.status==400){
-        alert("Error")
-    }
-   else {
-        alert("Sucessfully login")
-        history('/About')
-    }
-   
+  if(response.status==400){
 
+    alert("Error")
+  }
+  else{
+    alert("Sucessfull login")
+    history("/About")
+  }
+   
     
     
   };
@@ -51,21 +58,21 @@ function login() {
   };
 
   return (
-    <form onSubmit={handleSubmit} method='POST' style={{ maxWidth: '500px', margin: '0 auto' }}>
-     
+    <form onSubmit={handleSubmit} style={{ maxWidth: '500px', margin: '0 auto' }}>
+    
       <label style={{ display: 'block', marginBottom: '5px' }}>
         Email:
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={inputStyle} />
       </label>
-    
+     
       <label style={{ display: 'block', marginBottom: '5px' }}>
         Password:
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={inputStyle} />
       </label>
-    
-      <button type="submit" style={buttonStyle}>Register</button>
+      
+      <button type="submit" style={buttonStyle}>Login</button>
     </form>
   );
 }
 
-export default login;
+export default Login;

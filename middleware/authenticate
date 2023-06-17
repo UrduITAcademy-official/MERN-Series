@@ -3,7 +3,6 @@ const User = require("../userSchema");
 const authenticate = async (req, res, next) => {
   try {
     const cookie = req.headers.cookie;
-
     const cookieString = cookie;
     const cookies = cookieString.split("; ");
     let myCookieValue;
@@ -21,7 +20,6 @@ const authenticate = async (req, res, next) => {
       _id: verifyToken._id,
       "tokens.token": token,
     });
-
     if (!rootUser) {
       throw new Error("User not found");
     }
@@ -31,12 +29,10 @@ const authenticate = async (req, res, next) => {
     console.log(rootUser);
     next();
 
-
   } catch (err) {
     //res.status(401).send("Unauthrized:No token provided");
     res.status(401).json({error:"Unauthrized:No token provided"})
     console.log(err);
   }
-
 };
 module.exports = authenticate;

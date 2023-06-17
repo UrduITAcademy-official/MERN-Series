@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState  } from "react";
 import { useNavigate } from "react-router-dom";
 const About = () => {
+
+  const [userData, setUserData] = useState('');
   const history = useNavigate();
   const callAboutPage = async () => {
     try {
@@ -22,6 +24,7 @@ const About = () => {
       } else {
         console.log(data);
         console.log("hi from elase");
+        setUserData(data);
       }
     } catch (error) {
       console.error(error);
@@ -34,9 +37,14 @@ const About = () => {
   }, []);
 
   return (
-    <>
-      <h1>Welcome from About Page </h1>
-    </>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+      <h1 style={{ textAlign: 'center' }}>About Us</h1>
+      <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px', width: '100%', marginTop: '20px' }}>
+        <label style={{ marginBottom: '5px', fontWeight: 'bold' }}>Name:{userData.name}</label>
+        <label style={{ marginBottom: '5px', fontWeight: 'bold' }}>Email:{userData.email}</label>    
+        <label style={{ marginBottom: '5px', fontWeight: 'bold' }}>Work:{userData.work}</label>
+      </div>
+    </div>
   );
 };
 
